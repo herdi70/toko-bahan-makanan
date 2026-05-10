@@ -1,0 +1,212 @@
+/* General Styles */
+body {
+  font-family: 'Arial', sans-serif;
+  background: linear-gradient(to right, #FF5722, #FF9800); /* Gradient background */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+/* Header */
+header {
+  text-align: center;
+  color: #fff;
+  margin-bottom: 30px;
+}
+
+h1 {
+  font-size: 3rem;
+  margin-bottom: 10px;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+/* Main Container (Flexbox for two columns) */
+.container {
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 100%;
+  max-width: 1200px;
+}
+
+/* Katalog Barang */
+.katalog {
+  flex: 2;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.product-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: space-between;
+}
+
+.product-card {
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  width: 220px;
+  padding: 20px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.product-card img {
+  max-width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+.product-card h3 {
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+}
+
+.product-card .price {
+  font-size: 1.2rem;
+  color: #388E3C;
+}
+
+/* Keranjang Belanja */
+.keranjang {
+  flex: 1;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#keranjang ul {
+  list-style-type: none;
+  margin-bottom: 20px;
+}
+
+#keranjang li {
+  margin-bottom: 10px;
+  font-size: 1rem;
+  color: #333;
+}
+
+#total-harga {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  font-weight: bold;
+  color: #388E3C;
+}
+
+#proses-pembelian-btn {
+  width: 100%;
+  padding: 12px;
+  background-color: #FF9800;
+  font-size: 1.3rem;
+  border-radius: 8px;
+}
+
+#proses-pembelian-btn:hover {
+  background-color: #f57c00;
+}
+
+/* Modal (Struk Pembelian) */
+.modal {
+  display: none; /* Sembunyikan modal secara default */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7); /* Latar belakang transparan */
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Pastikan modal berada di atas konten lain */
+}
+
+.modal-content {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 15px;
+  width: 400px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 0.5s ease-out;
+}
+
+#struk-list {
+  list-style-type: none;
+  padding: 0;
+  margin-bottom: 20px;
+}
+
+#struk-list li {
+  margin-bottom: 10px;
+  font-size: 1.2rem;
+}
+
+#total-struk {
+  font-weight: bold;
+  font-size: 1.4rem;
+  color: #388E3C;
+}
+
+#tutup-struk-btn {
+  width: 100%;
+  padding: 12px;
+  background-color: #f44336;
+  font-size: 1.2rem;
+  border-radius: 8px;
+}
+
+#tutup-struk-btn:hover {
+  background-color: #e53935;
+}
+
+/* Animasi untuk modal */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Responsif */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .katalog, .keranjang {
+    width: 100%;
+  }
+}

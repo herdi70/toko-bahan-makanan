@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Toko Bahan Makanan</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>Toko Bahan Makanan</h1>
+    <button id="logout-btn" class="btn-logout">Logout</button>
+  </header>
+
+  <main class="container">
+    <!-- Katalog Barang (Kiri) -->
+    <section id="katalog-barang" class="katalog">
+      <h2>Katalog Barang</h2>
+      <div id="barang-list" class="product-list">
+        <!-- Barang akan ditambahkan secara dinamis oleh JavaScript -->
+      </div>
+    </section>
+
+    <!-- Keranjang Belanja (Kanan) -->
+    <section id="keranjang" class="keranjang">
+      <h2>Keranjang Saya</h2>
+      <ul id="keranjang-ul">
+        <!-- Keranjang akan ditampilkan di sini -->
+      </ul>
+      <div id="total-harga">
+        <strong>Total Harga: Rp <span id="total">0</span></strong>
+      </div>
+      <button id="proses-pembelian-btn" class="btn-proses">Proses Pembelian</button>
+    </section>
+  </main>
+
+  <!-- Modal untuk Menampilkan Struk Pembelian -->
+  <div id="struk-modal" class="modal">
+    <div class="modal-content">
+      <h2>Struk Pembelian</h2>
+      <ul id="struk-list">
+        <!-- Rincian struk akan ditampilkan di sini -->
+      </ul>
+      <p id="total-struk">Total Pembelian: Rp 0</p>
+      <button id="tutup-struk-btn">Tutup</button>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+  <script src="riwayat-transaksi.js"></script>
+  <script src="login.js"></script>
+</body>
+</html>
