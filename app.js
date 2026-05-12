@@ -133,16 +133,7 @@ logoutBtn.addEventListener("click", function() {
   window.location.href = "login.html";
 });
 
-// Tambahan untuk CI test agar workflow hijau
-function sum(a, b) {
-  return a + b;
-}
-
-function sum(a, b) {
-  return a + b;
-}
-
-// Export sum untuk testing, tanpa redeclare
+// Export sum untuk CI test tanpa redeclare
 if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
   if (!module.exports.sum) {
     module.exports.sum = sum; // gunakan sum yang sudah ada
