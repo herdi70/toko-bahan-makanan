@@ -1,9 +1,9 @@
-// Mengecek apakah pengguna sudah login
+// Mengecek login
 if (!localStorage.getItem("loggedIn")) {
   window.location.href = "login.html";
 }
 
-// Data Barang (termasuk harga, stok, dan gambar produk)
+// Data barang
 const barangList = [
   { nama: 'Beras merah', harga: 22000, stok: 75, gambar: 'beras merah.jpg' },
   { nama: 'Gula aren', harga: 34000, stok: 100, gambar: 'gula aren.jpg' },
@@ -13,14 +13,14 @@ const barangList = [
   { nama: 'Cabai merah', harga: 54000, stok: 500, gambar: 'cabai merah.jpg' }
 ];
 
-// Mengambil elemen HTML
+// Elemen HTML
 const barangListElement = document.getElementById('barang-list');
 const keranjangUl = document.getElementById('keranjang-ul');
 const totalHargaElement = document.getElementById('total');
 const prosesPembelianBtn = document.getElementById('proses-pembelian-btn');
 const logoutBtn = document.getElementById("logout-btn");
 
-// Menampilkan produk di katalog
+// Tampilkan katalog
 barangList.forEach(barang => {
   const card = document.createElement('div');
   card.classList.add('product-card');
@@ -33,23 +33,23 @@ barangList.forEach(barang => {
     <input type="number" id="jumlah-${barang.nama}" min="1" max="${barang.stok}" value="1">
     <button class="tambah-btn" data-nama="${barang.nama}" data-harga="${barang.harga}" data-stok="${barang.stok}">Tambah ke Keranjang</button>
   `;
+
   barangListElement.appendChild(card);
 });
 
-// Keranjang belanja
+// Keranjang
 let keranjang = [];
 
-// Fungsi menambahkan ke keranjang
 function tambahKeKeranjang(nama, harga, stok) {
   const jumlah = parseInt(document.getElementById(`jumlah-${nama}`).value);
   if (isNaN(jumlah) || jumlah <= 0 || jumlah > stok) {
     alert("Jumlah barang tidak valid!");
     return;
   }
-  const barang = keranjang.find(item => item.nama === nama);
-  if (barang) {
-    barang.jumlah += jumlah;
-    barang.total = barang.jumlah * harga;
+  const item = keranjang.find(i => i.nama === nama);
+  if (item) {
+    item.jumlah += jumlah;
+    item.total = item.jumlah * harga;
   } else {
     keranjang.push({ nama, harga, jumlah, total: harga * jumlah });
   }
@@ -57,7 +57,6 @@ function tambahKeKeranjang(nama, harga, stok) {
   hitungTotalBelanja();
 }
 
-// Menampilkan keranjang
 function tampilkanKeranjang() {
   keranjangUl.innerHTML = '';
   keranjang.forEach(item => {
@@ -67,61 +66,27 @@ function tampilkanKeranjang() {
   });
 }
 
-// Hitung total
 function hitungTotalBelanja() {
   const total = keranjang.reduce((acc, item) => acc + item.total, 0);
   totalHargaElement.textContent = total;
 }
 
-// Tampilkan struk
-function tampilkanStruk() {
-  const strukList = document.getElementById('struk-list');
-  strukList.innerHTML = '';
-  keranjang.forEach(item => {
-    const li = document.createElement('li');
-    li.textContent = `${item.nama} x${item.jumlah} - Rp${item.total}`;
-    strukList.appendChild(li);
-  });
-  document.getElementById('total-struk').textContent = `Total Pembelian: Rp ${totalHargaElement.textContent}`;
-  document.getElementById('struk-modal').style.display = 'flex';
-}
-
-// Tutup modal
-document.getElementById('tutup-struk-btn').addEventListener('click', () => {
-  document.getElementById('struk-modal').style.display = 'none';
-});
-
-// Tombol tambah ke keranjang
-document.querySelectorAll('.tambah-btn').forEach(button => {
-  button.addEventListener('click', (event) => {
-    const nama = event.target.getAttribute('data-nama');
-    const harga = parseInt(event.target.getAttribute('data-harga'));
-    const stok = parseInt(event.target.getAttribute('data-stok'));
+// Event tambah
+document.querySelectorAll('.tambah-btn').forEach(btn => {
+  btn.addEventListener('click', e => {
+    const nama = e.target.dataset.nama;
+    const harga = parseInt(e.target.dataset.harga);
+    const stok = parseInt(e.target.dataset.stok);
     tambahKeKeranjang(nama, harga, stok);
   });
 });
 
-// Proses pembelian
-prosesPembelianBtn.addEventListener('click', () => {
-  alert(`Total Pembelian: Rp ${totalHargaElement.textContent}`);
-  tampilkanStruk();
-  keranjang = [];
-  tampilkanKeranjang();
-  hitungTotalBelanja();
-});
-
-// Logout
-logoutBtn.addEventListener("click", () => {
-  localStorage.removeItem("loggedIn");
-  window.location.href = "login.html";
-});
-
-// ===== Fungsi tambahan untuk CI Jest =====
+// Fungsi sum untuk test CI
 function sum(a, b) {
   return a + b;
 }
 
-// Export module agar Jest bisa test
+// Export agar Jest bisa test
 if (typeof module !== 'undefined') {
   module.exports = { sum };
 }
