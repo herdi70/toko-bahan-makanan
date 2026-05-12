@@ -1,5 +1,6 @@
 // Mengecek apakah pengguna sudah login
 if (!localStorage.getItem("loggedIn")) {
+  // Jika belum login, arahkan pengguna ke halaman login
   window.location.href = "login.html";
 }
 
@@ -44,8 +45,9 @@ let keranjang = [];
 function tambahKeKeranjang(nama, harga, stok) {
   const jumlah = parseInt(document.getElementById(`jumlah-${nama}`).value);
 
+  // Validasi jumlah agar tidak lebih dari stok yang tersedia
   if (isNaN(jumlah) || jumlah <= 0 || jumlah > stok) {
-    alert("Jumlah barang tidak valid!");
+    alert("Jumlah barang tidak valid! Pastikan jumlahnya sesuai dengan stok.");
     return;
   }
 
@@ -64,7 +66,8 @@ function tambahKeKeranjang(nama, harga, stok) {
 
 // Menampilkan keranjang belanja
 function tampilkanKeranjang() {
-  keranjangUl.innerHTML = ''; 
+  keranjangUl.innerHTML = ''; // Clear keranjang
+  
   keranjang.forEach(item => {
     const li = document.createElement('li');
     li.textContent = `${item.nama} x${item.jumlah} - Rp${item.total}`;
@@ -78,17 +81,59 @@ function hitungTotalBelanja() {
   totalHargaElement.textContent = total;
 }
 
-// Event tombol tambah
+// Menampilkan struk transaksi di modal
+function tampilkanStruk() {
+  const strukList = document.getElementById('struk-list');
+  strukList.innerHTML = ''; // Clear struk sebelumnya
+
+  keranjang.forEach(item => {
+    const li = document.createElement('li');
+    li.textContent = `${item.nama} x${item.jumlah} - Rp${item.total}`;
+    strukList.appendChild(li);
+  });
+
+  // Menampilkan total harga di struk
+  document.getElementById('total-struk').textContent = `Total Pembelian: Rp ${totalHargaElement.textContent}`;
+
+  // Menampilkan modal struk
+  document.getElementById('struk-modal').style.display = 'flex';
+}
+
+// Menutup modal struk
+document.getElementById('tutup-struk-btn').addEventListener('click', () => {
+  document.getElementById('struk-modal').style.display = 'none';
+});
+
+// Event Listener untuk tombol "Tambah ke Keranjang"
 document.querySelectorAll('.tambah-btn').forEach(button => {
   button.addEventListener('click', (event) => {
-    const nama = event.target.dataset.nama;
-    const harga = parseInt(event.target.dataset.harga);
-    const stok = parseInt(event.target.dataset.stok);
+    const nama = event.target.getAttribute('data-nama');
+    const harga = parseInt(event.target.getAttribute('data-harga'));
+    const stok = parseInt(event.target.getAttribute('data-stok'));
+
     tambahKeKeranjang(nama, harga, stok);
   });
 });
 
-// Fungsi sum untuk CI test
+// Menyelesaikan pembelian dan menampilkan struk
+prosesPembelianBtn.addEventListener('click', () => {
+  alert(`Total Pembelian: Rp ${totalHargaElement.textContent}`);
+  tampilkanStruk(); // Tampilkan modal struk setelah transaksi selesai
+  keranjang = [];
+  tampilkanKeranjang();
+  hitungTotalBelanja();
+});
+
+// Tombol Logout
+logoutBtn.addEventListener("click", function() {
+  // Menghapus status login di localStorage
+  localStorage.removeItem("loggedIn");
+
+  // Mengarahkan pengguna kembali ke halaman login
+  window.location.href = "login.html";
+});
+
+// Tambahan untuk CI test agar workflow hijau
 function sum(a, b) {
   return a + b;
 }
@@ -97,6 +142,9 @@ function sum(a, b) {
   return a + b;
 }
 
-if (typeof module !== 'undefined') {
-  module.exports = { sum };
+// Export sum untuk testing, tanpa redeclare
+if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
+  if (!module.exports.sum) {
+    module.exports.sum = sum; // gunakan sum yang sudah ada
+  }
 }

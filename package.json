@@ -1,6 +1,7 @@
 {
   "name": "toko-bahan-makanan",
   "version": "1.0.0",
+  "description": "Project toko bahan makanan",
   "main": "app.js",
   "scripts": {
     "test": "jest"
