@@ -36,14 +36,6 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      # Optional: jalankan lint
-      - name: Lint code
-        run: npm run lint || echo "Lint warnings, tetap lanjut"
-
-      # Optional: build project (jika ada)
-      - name: Build project
-        run: npm run build || echo "Build warning, tetap lanjut"
-
       # Run tests
       - name: Run tests
         run: npm test

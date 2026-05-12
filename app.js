@@ -133,8 +133,9 @@ logoutBtn.addEventListener("click", function () {
   window.location.href = "login.html";
 });
 // app.js
+// app.js
 function sum(a, b) {
   return a + b;
 }
 
-module.exports = { sum };  // untuk bisa diimport di test jika perlu
+module.exports = { sum };
