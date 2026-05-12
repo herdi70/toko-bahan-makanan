@@ -1,12 +1,12 @@
 {
   "name": "toko-bahan-makanan",
   "version": "1.0.0",
-  "description": "",
+  "description": "Project toko bahan makanan",
   "main": "index.js",
   "scripts": {
     "test": "jest"
   },
   "devDependencies": {
-    "jest": "^30.4.2"
+    "jest": "^29.7.0"
   }
 }

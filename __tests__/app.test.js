@@ -1,6 +1,5 @@
-// app.test.js
+const sum = (a, b) => a + b;
 
-// Test sederhana untuk menjumlahkan 2 + 2
-test('suma 2 + 2', () => {
-  expect(2 + 2).toBe(4);
+test('adds 1 + 2 to equal 3', () => {
+  expect(sum(1, 2)).toBe(3);
 });
