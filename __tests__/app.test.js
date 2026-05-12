@@ -1,13 +1,8 @@
-// Mock browser APIs
-global.localStorage = {
-  getItem: jest.fn(() => null),
-  setItem: jest.fn(),
-  removeItem: jest.fn(),
-};
+/**
+ * @jest-environment jsdom
+ */
 
-global.window = Object.create(global);
-window.location = { href: "" };
-
+// Sekarang Jest pakai environment mirip browser
 const { sum } = require('../app');
 
 test('adds 1 + 2 to equal 3', () => {
