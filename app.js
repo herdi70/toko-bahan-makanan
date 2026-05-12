@@ -25,7 +25,7 @@ const logoutBtn = document.getElementById("logout-btn");
 barangList.forEach(barang => {
   const card = document.createElement('div');
   card.classList.add('product-card');
-  
+
   card.innerHTML = `
     <img src="images/${barang.gambar}" alt="${barang.nama}" class="product-image">
     <h3>${barang.nama}</h3>
@@ -34,7 +34,7 @@ barangList.forEach(barang => {
     <input type="number" id="jumlah-${barang.nama}" min="1" max="${barang.stok}" value="1">
     <button class="tambah-btn" data-nama="${barang.nama}" data-harga="${barang.harga}" data-stok="${barang.stok}">Tambah ke Keranjang</button>
   `;
-  
+
   barangListElement.appendChild(card);
 });
 
@@ -52,7 +52,7 @@ function tambahKeKeranjang(nama, harga, stok) {
   }
 
   const barang = keranjang.find(item => item.nama === nama);
-  
+
   if (barang) {
     barang.jumlah += jumlah;
     barang.total = barang.jumlah * harga;
@@ -67,7 +67,7 @@ function tambahKeKeranjang(nama, harga, stok) {
 // Menampilkan keranjang belanja
 function tampilkanKeranjang() {
   keranjangUl.innerHTML = ''; // Clear keranjang
-  
+
   keranjang.forEach(item => {
     const li = document.createElement('li');
     li.textContent = `${item.nama} x${item.jumlah} - Rp${item.total}`;
@@ -125,10 +125,16 @@ prosesPembelianBtn.addEventListener('click', () => {
 });
 
 // Tombol Logout
-logoutBtn.addEventListener("click", function() {
+logoutBtn.addEventListener("click", function () {
   // Menghapus status login di localStorage
   localStorage.removeItem("loggedIn");
 
   // Mengarahkan pengguna kembali ke halaman login
   window.location.href = "login.html";
 });
+// app.js
+function sum(a, b) {
+  return a + b;
+}
+
+module.exports = { sum };  // untuk bisa diimport di test jika perlu
