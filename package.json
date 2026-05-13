@@ -1,10 +1,11 @@
 {
   "name": "toko-bahan-makanan",
   "version": "1.0.0",
+  "main": "app.js",
   "scripts": {
     "test": "jest"
   },
   "devDependencies": {
-  "jest": "^29.7.0"
-}
+    "jest": "^29.7.0"
+  }
 }
